@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
-
+import axios from 'axios';
 type FormData = {
   name: string;
   email: string;
-  message: string;
+  content: string;
 };
 
 function App() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-    message: '',
+    content: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const backend_URL = "http://localhost:3000/api/messages/send"
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically send the data to your backend
     console.log('Form submitted:', formData);
     setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-    setFormData({ name: '', email: '', message: '' });
+    axios.post(backend_URL,formData).then(res => {
+      setTimeout(() => setIsSubmitted(false), 3000);
+    }).catch((err) => {
+      console.log(err.response.data);
+    })
+    setFormData({ name: '', email: '', content: '' });
   };
 
   const handleChange = (
@@ -85,16 +90,16 @@ function App() {
 
             <div>
               <label 
-                htmlFor="message" 
+                htmlFor="content" 
                 className="block text-sm font-medium text-gray-700"
               >
-                Message
+                Content
               </label>
               <textarea
-                id="message"
-                name="message"
+                id="content"
+                name="content"
                 required
-                value={formData.message}
+                value={formData.content}
                 onChange={handleChange}
                 rows={4}
                 className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 

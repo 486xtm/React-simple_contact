@@ -14,7 +14,7 @@ function App() {
     content: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const backend_URL = "http://localhost:3000/api/messages/send"
+  const backend_URL = "https://node-telegramfoward.vercel.app/api/messages/send"
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

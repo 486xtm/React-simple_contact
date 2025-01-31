@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 type FormData = {
-  // ipAddress: string,
-  // location: string,
   content: string;
 };
 
 function App() {
   const [formData, setFormData] = useState<FormData>({
-    // ipAddress: '',
-    // location: '',
     content: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -37,27 +33,6 @@ function App() {
     }));
   };
 
-  // useEffect(() => {
-  //   const fetchIp = async () => {
-  //     let IpAddress = "";
-  //     let geoLocation = "";
-  //     await fetch("https://ipinfo.io/json")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       IpAddress = data.ip;
-  //       geoLocation = `${data.city}, ${data.region}, ${data.country}`;
-  //       setFormData({...formData, ipAddress: data.ip, location: geoLocation})
-  //       console.log("IP Address:", data.ip);
-  //       console.log(
-  //         "Location:",
-  //         data.city + ", " + data.region + ", " + data.country
-  //       );
-  //     })
-  //     .catch((error) => console.error("Error fetching IP information:", error));
-  //   }
-  //   fetchIp();
-  // },[])
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden">
@@ -67,46 +42,6 @@ function App() {
           </h2>
           
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* <div>
-              <label 
-                htmlFor="name" 
-                className="block text-sm font-medium text-gray-700"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 
-                         bg-gray-50 px-4 py-2 text-gray-900 placeholder-gray-500"
-                placeholder="Your name"
-              />
-            </div>
-
-            <div>
-              <label 
-                htmlFor="email" 
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 
-                         bg-gray-50 px-4 py-2 text-gray-900 placeholder-gray-500"
-                placeholder="your.email@example.com"
-              />
-            </div> */}
-
             <div>
               <label 
                 htmlFor="content" 

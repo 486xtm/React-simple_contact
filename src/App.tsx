@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 type FormData = {
-  ipAddress: string,
-  location: string,
+  // ipAddress: string,
+  // location: string,
   content: string;
 };
 
 function App() {
   const [formData, setFormData] = useState<FormData>({
-    ipAddress: '',
-    location: '',
+    // ipAddress: '',
+    // location: '',
     content: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -37,26 +37,26 @@ function App() {
     }));
   };
 
-  useEffect(() => {
-    const fetchIp = async () => {
-      let IpAddress = "";
-      let geoLocation = "";
-      await fetch("https://ipinfo.io/json")
-      .then((response) => response.json())
-      .then((data) => {
-        IpAddress = data.ip;
-        geoLocation = `${data.city}, ${data.region}, ${data.country}`;
-        setFormData({...formData, ipAddress: data.ip, location: geoLocation})
-        console.log("IP Address:", data.ip);
-        console.log(
-          "Location:",
-          data.city + ", " + data.region + ", " + data.country
-        );
-      })
-      .catch((error) => console.error("Error fetching IP information:", error));
-    }
-    fetchIp();
-  },[])
+  // useEffect(() => {
+  //   const fetchIp = async () => {
+  //     let IpAddress = "";
+  //     let geoLocation = "";
+  //     await fetch("https://ipinfo.io/json")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       IpAddress = data.ip;
+  //       geoLocation = `${data.city}, ${data.region}, ${data.country}`;
+  //       setFormData({...formData, ipAddress: data.ip, location: geoLocation})
+  //       console.log("IP Address:", data.ip);
+  //       console.log(
+  //         "Location:",
+  //         data.city + ", " + data.region + ", " + data.country
+  //       );
+  //     })
+  //     .catch((error) => console.error("Error fetching IP information:", error));
+  //   }
+  //   fetchIp();
+  // },[])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">

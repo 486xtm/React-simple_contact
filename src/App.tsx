@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 type FormData = {
+  ipAddress: string,
+  location: string,
   content: string;
 };
 
 function App() {
   const [formData, setFormData] = useState<FormData>({
+    ipAddress: '',
+    location: '',
     content: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -14,15 +18,13 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log('Form submitted:', formData);
     setIsSubmitted(true);
     axios.post(backend_URL,formData).then(res => {
       setTimeout(() => setIsSubmitted(false), 3000);
     }).catch((err) => {
       console.log(err.response.data);
     })
-    setFormData({ content: '' });
+    setFormData({ ...formData, content: '' });
   };
 
   const handleChange = (
@@ -34,6 +36,27 @@ function App() {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    const fetchIp = async () => {
+      let IpAddress = "";
+      let geoLocation = "";
+      await fetch("https://ipinfo.io/json")
+      .then((response) => response.json())
+      .then((data) => {
+        IpAddress = data.ip;
+        geoLocation = `${data.city}, ${data.region}, ${data.country}`;
+        setFormData({...formData, ipAddress: data.ip, location: geoLocation})
+        console.log("IP Address:", data.ip);
+        console.log(
+          "Location:",
+          data.city + ", " + data.region + ", " + data.country
+        );
+      })
+      .catch((error) => console.error("Error fetching IP information:", error));
+    }
+    fetchIp();
+  },[])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">

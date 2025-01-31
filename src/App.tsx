@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 type FormData = {
-  name: string;
-  email: string;
   content: string;
 };
 
 function App() {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
     content: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -26,7 +22,7 @@ function App() {
     }).catch((err) => {
       console.log(err.response.data);
     })
-    setFormData({ name: '', email: '', content: '' });
+    setFormData({ content: '' });
   };
 
   const handleChange = (
@@ -44,11 +40,11 @@ function App() {
       <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden">
         <div className="px-8 py-6">
           <h2 className="text-2xl font-bold text-gray-800 text-center mb-8">
-            Get in Touch
+            Contact US
           </h2>
           
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
+            {/* <div>
               <label 
                 htmlFor="name" 
                 className="block text-sm font-medium text-gray-700"
@@ -86,7 +82,7 @@ function App() {
                          bg-gray-50 px-4 py-2 text-gray-900 placeholder-gray-500"
                 placeholder="your.email@example.com"
               />
-            </div>
+            </div> */}
 
             <div>
               <label 
